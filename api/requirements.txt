@@ -1,0 +1,6 @@
+Flask==1.0.2
+pymongo
+Flask-WTF
+geopy
+uwsgi
+gunicorn
