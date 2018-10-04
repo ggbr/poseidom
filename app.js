@@ -1,10 +1,20 @@
-var os 	= require('os-utils');
+// app.js
+const express = require('express');
+const bodyParser = require('body-parser');
+// initialize our express app
+const app = express();
 
+let port = 3000;
+var mongoose = require('mongoose');
 
-os.cpuUsage(function(v){
-	console.log( 'CPU Usage (%): ' + v );
-});
+mongoose.connect('mongodb://mongodb:27017/');
+var ObjectID = require('mongodb').ObjectID;
+var conn = mongoose.connection;
 
-os.cpuFree(function(v){
-	console.log( 'CPU Free:' + v );
-});
+var user = {
+  a: 'abc',
+  _id: new ObjectID()
+};
+
+conn.collection('aaa').insert(user);
+
