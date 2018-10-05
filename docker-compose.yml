@@ -1,14 +1,17 @@
 version: '3'
 services:
-  web:
-    build: ./monitor
+  metric:
+    tty: true
+    stdin_open: true
+    build: ./metric
     ports:
     - "88:3000"
     volumes:
     - "/dev:/dev"
+    - "/dev/disk/:/dev/disk:ro"
     - "/var/run:/var/run:ro"
     - "/sys:/sys:ro"
-    - "./monitor:/usr/src/app"
+    - "./metric:/app"
     depends_on:
     - mongodb
     networks: 
@@ -23,31 +26,7 @@ services:
     - mongodb
     networks: 
     - samplenet
-  api:
-    build: ./api
-    ports:
-      - "5000:5000"
-    volumes:
-      - './api:/app'
-    environment:
-      - MONGO_URI=mongodb://sampledb/sample
-    depends_on: 
-      - mongodb
-    networks: 
-      - samplenet
-  nginx:
-    restart: always
-    image: nginx:1.13.3
-    ports:
-      - "8066:80"
-    depends_on:
-      - api
-    volumes:
-      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
-      - './nginx/default.conf:/etc/nginx/conf.d/default.conf'
-    networks: 
-      - samplenet
-  
+ 
   mongodb:
     image: mongo
     ports:

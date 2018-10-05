@@ -30,6 +30,10 @@
           return false;
         });
 
+        socket.on('a', function(arrayMsg){
+          alert(arrayMsg);
+        });
+
         socket.on('chat message', function(arrayMsg){
             $('#messages').html('');
             for(i = 0; i < arrayMsg.length; i++) { 

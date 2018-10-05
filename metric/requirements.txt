@@ -1,0 +1,5 @@
+pymongo
+mongoengine
+psutil
+socketIO-client-2
+requests
