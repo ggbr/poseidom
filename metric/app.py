@@ -15,7 +15,7 @@ def status():
     m =  psutil.virtual_memory()
     memoria =  str(m.percent)
     
-    diskDir = psutil.disk_usage('/dev/disk/')
+    diskDir = psutil.disk_usage('/')
     disk = str(diskDir.percent)
     list  = []
     for proc in psutil.process_iter():
@@ -40,7 +40,7 @@ def save(cpu,memorria,disk,process):
 
 
 def alert(cpu):
-    if float(cpu) > 40:
+    if float(cpu) > 70:
 
         source = 'http://192.168.0.110:3000'
 
