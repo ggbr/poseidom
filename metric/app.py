@@ -3,6 +3,8 @@ import time
 import pymongo
 import urllib.request
 
+host = "192.168.1.24"
+
 
 myclient = pymongo.MongoClient('mongodb://mongodb:27017/')
 mydb = myclient['metric']
@@ -42,9 +44,9 @@ def save(cpu,memorria,disk,process):
 def alert(cpu):
     if float(cpu) > 70:
 
-        source = 'http://192.168.0.110:3000'
+        source = 'http://' +host +':3000'
 
-        with urllib.request.urlopen('http://192.168.0.110:3000/a') as response:
+        with urllib.request.urlopen(source+ '/a') as response:
             html = response.read()
 
         print("Enviando alerta...")
